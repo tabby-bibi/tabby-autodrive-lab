@@ -6,10 +6,10 @@
 
 ## 👥 Team Tabby
 
-| 이름 | 역할 | 소개 |
-|------|------|------|
-| 한비 ([bibisam06](https://github.com/bibisam06)) | 🧠 Software | - Raspberry Pi4 기반 파이썬 프로젝트 구조 설계<br>- VL53L0X, EAI Radar 센서를 이용한 장애물 감지 및 회피 로직 구현<br>- PiCamera2 + OpenCV를 활용한 차선 인식 기능 개발<br>- 거리 기반 판단 + 차선 중심 추적을 결합한 자율주행 로직 설계<br>- 코드 모듈화 및 테스트 주행 시나리오 작성 |
-| 곽태영 ([asdqwe9501](https://github.com/asdqwe9501)) | 🤖 딥러닝 & Hardware | - NVIDIA Jetson Nano를 활용한 딥러닝 학습 환경 구축<br>- 라인트레이싱용 딥러닝 모델 개발 및 실험<br>- Google Colab에서 실시간 학습 파이프라인 구성<br>- 자율주행 중 발생한 데이터를 수집 및 추가 학습 기능 기획<br>- 향후 MCU 기반 기기 확장 검토 및 연구 진행 중 |
+| 이름                                                | 역할 | 소개                                                                                                                                                                                               |
+|---------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 정한비 ([bibisam06](https://github.com/bibisam06))   | 🧠 Software | - Raspberry Pi4 기반 파이썬 프로젝트 구조 설계<br>- VL53L0X, EAI Radar 센서를 이용한 장애물 감지 및 회피 로직 구현<br>- PiCamera2 + OpenCV를 활용한 차선 인식 기능 개발<br>- 거리 기반 판단 + 차선 중심 추적을 결합한 자율주행 로직 설계<br>- 코드 모듈화 및 테스트 주행 시나리오 작성 |
+| 곽태영 ([asdqwe9501](https://github.com/asdqwe9501)) | 🤖 딥러닝 & Hardware | - 실시간 이미지 데이터 저장을 통해 Google Colab에서 학습 파이프라인 구성<br>- 자율주행 중 발생한 데이터를 수집 및 추가 학습 기능 기획<br>- 향후 MCU 기반 기기 확장 검토 및 연구 진행 중                                                                    |
 ---
 
 ## 🛠️ Tech Stack
@@ -17,7 +17,6 @@
 - Raspberry Pi 4, PiCamera2
 - Python + OpenCV
 - VL53L0X, (EAI Radar 센서)
-- NVIDIA Jetson Nano (딥러닝 테스트용)
 - Google Colab + TensorFlow/Keras (딥러닝 학습 환경)
 
 ---
