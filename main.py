@@ -3,7 +3,12 @@
 """
 
 def main():
-    print("hello")
+    print(" ====== main 시작 ====== ")
+
+
+
+
+    print(" ====== main 끝남 ====== ")
 
 
 
