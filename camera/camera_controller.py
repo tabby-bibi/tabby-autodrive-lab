@@ -23,9 +23,11 @@ class CameraManager:
         })
 
     def start(self):
+        print(" ====== camera started ====== ")
         self.picam2.start()
 
     def stop(self):
+        print(" ====== camera stopped ====== ")
         self.picam2.stop()
 
     def capture_frame(self):

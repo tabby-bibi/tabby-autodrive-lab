@@ -6,7 +6,7 @@ import numpy as np
 import time
 import pigpio
 from PIL import Image
-from picamera2 import Picamera2
+from picamera2 import picamera2
 import csv
 import os
 from datetime import datetime
