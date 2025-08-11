@@ -23,16 +23,29 @@ class CameraManager:
         })
 
     def start(self):
-        print(" ====== camera started ====== ")
-        self.picam2.start()
+        try:
+            print(" ====== camera started ====== ")
+            self.picam2.start()
+        except Exception as e:
+            print(f"Error while starting camera: {e}")
 
     def stop(self):
         print(" ====== camera stopped ====== ")
         self.picam2.stop()
 
     def capture_frame(self):
-        return self.picam2.capture_array()
+        try:
+            frame = self.picam2.capture_array()
+            if frame is None:
+                print("Warning: Captured frame is None.")
+            return frame
+        except Exception as e:
+            print(f"Error capturing frame: {e}")
+            return None
 
     def release(self):
         self.stop()
         cv2.destroyAllWindows()
+
+    def __del__(self):
+        self.release()

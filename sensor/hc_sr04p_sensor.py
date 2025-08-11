@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-# TODO : 개발 환경 ( ex : macOs ) 에 따른 라이브러리 설정 해야 함 일단은 그냥 에러 그냥 둘거임 
+# TODO : 개발 환경 ( ex : macOs ) 에 따른 라이브러리 설정 해야 함 일단은 그냥 에러 일단 주석처리해둘거임
 import time
 
 # TODO : GPIO 핀 설정등 어떻게 할지 정해야 함
@@ -15,7 +15,7 @@ class HCSR04Sensor:
         time.sleep(2)  # 센서 안정화 시간
 
     def get_distance(self):
-        # 트리거에 10us 펄스 신호 발생
+        #  트리거에 10us 펄스 신호 발생
         GPIO.output(self.trig_pin, True)
         time.sleep(0.00001)
         GPIO.output(self.trig_pin, False)
@@ -36,3 +36,4 @@ class HCSR04Sensor:
 
     def cleanup(self):
         GPIO.cleanup()
+        pass
