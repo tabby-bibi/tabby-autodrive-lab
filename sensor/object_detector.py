@@ -1,6 +1,5 @@
 # 센서 import
 from .hc_sr04p_sensor import HCSR04Sensor
-from .vl53l0x_sensor import VL53L0XSensor
 from camera.camera_controller import CameraManager
 
 # 패키지 import
@@ -17,7 +16,7 @@ class ObjectDetector:
        try:
            # 센서 초기화
            self.sensor1 = HCSR04Sensor(trig_pin, echo_pin)  # HC-SR04P 초음파 센서
-           self.sensor2 = VL53L0XSensor()  # VL53L0X 레이저 거리 센서
+
 
            # 카메라 초기화
            self.camera = CameraManager()
@@ -44,7 +43,7 @@ class ObjectDetector:
                     d_ultra = None
 
 
-                logging.debug("[HC-SR04P] %s cm, [VL53L0X] %s cm", d_ultra, d_lidar)
+                logging.debug("[HC-SR04P] %s cm", d_ultra)
 
                 # 안전 비교: None 체크
                 obstacle = ((d_ultra is not None and d_ultra < threshold_cm))
