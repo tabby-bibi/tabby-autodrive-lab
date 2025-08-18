@@ -16,8 +16,6 @@ class ObjectDetector:
        try:
            # 센서 초기화
            self.sensor1 = HCSR04Sensor(trig_pin, echo_pin)  # HC-SR04P 초음파 센서
-
-
            # 카메라 초기화
            self.camera = CameraManager()
        except Exception as e:
@@ -33,26 +31,38 @@ class ObjectDetector:
 
         try:
             while True:
-                # 카메라 프레임은 필요할 때만 캡처 (비용이 큼)
-                # image_frame = self.camera.capture_frame()
-
                 try:
                     d_ultra = self.sensor1.get_distance()
                 except Exception as e:
                     logging.warning("초음파 센서 실패: %s", e)
                     d_ultra = None
 
-
                 logging.debug("[HC-SR04P] %s cm", d_ultra)
 
-                # 안전 비교: None 체크
-                obstacle = ((d_ultra is not None and d_ultra < threshold_cm))
-
+                obstacle = (d_ultra is not None and d_ultra < threshold_cm)
 
                 if obstacle:
                     logging.info("⚠ 장애물 감지됨")
                     print("object detected")
-                    # TODO: 정지/회피 명령 실행
+
+                    if self.motor:
+                        self.motor.stop()
+                        time.sleep(0.3)
+
+                        # === 카메라 프레임 분석 ===
+                        frame = self.camera.capture_frame()
+                        cx = self._get_obstacle_center(frame)  # TODO: OpenCV 등으로 구현
+                        frame_center = frame.shape[1] // 2  # 가로 중앙값
+
+                        if cx < frame_center:
+                            logging.info("➡ 장애물이 왼쪽 → 오른쪽으로 회피")
+                            self.motor.turn_right()
+                        else:
+                            logging.info("➡ 장애물이 오른쪽 → 왼쪽으로 회피")
+                            self.motor.turn_left()
+
+                        time.sleep(0.5)
+                        self.motor.forward()
 
                 time.sleep(loop_delay)
 
@@ -64,3 +74,12 @@ class ObjectDetector:
             except Exception:
                 pass
             logging.info("감지 로직 종료")
+
+    def _get_obstacle_center(self, frame):
+        """
+        프레임에서 장애물 중심 x좌표(cx) 반환
+        → 임시로 화면 정중앙 반환, 추후 OpenCV 객체 인식으로 구현 가능
+        """
+        h, w, _ = frame.shape
+        return w // 2
+
