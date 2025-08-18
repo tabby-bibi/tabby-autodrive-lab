@@ -71,27 +71,27 @@ def main():
                 print("forward")
                 # detector.motor.forward()
 
-            else:
-                # === 차선 인식 기반 주행 모드 ===
-                gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-                roi = region_of_interest(gray)  # 하단 ROI
-                hist = compute_histogram(roi)
-                lane_center = int(hist.argmax())
-                deviation = lane_center - FRAME_CENTER
-
-                # 차선 중심과 프레임 중심 비교
-                if deviation < -30:
-                    logging.debug("차선 왼쪽 → 좌회전")
-                    #detector.motor.turn_left()
-                    print("left turn")
-                elif deviation > 30:
-                    logging.debug("차선 오른쪽 → 우회전")
-                    #detector.motor.turn_right()
-                    print("right turn")
-                else:
-                    logging.debug("차선 중앙 → 직진")
-                    #detector.motor.forward()
-                    print("forward")
+            # else:
+            #     # === 차선 인식 기반 주행 모드 ===
+            #     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            #     roi = region_of_interest(gray)  # 하단 ROI
+            #     hist = compute_histogram(roi)
+            #     lane_center = int(hist.argmax())
+            #     deviation = lane_center - FRAME_CENTER
+            #
+            #     # 차선 중심과 프레임 중심 비교
+            #     if deviation < -30:
+            #         logging.debug("차선 왼쪽 → 좌회전")
+            #         #detector.motor.turn_left()
+            #         print("left turn")
+            #     elif deviation > 30:
+            #         logging.debug("차선 오른쪽 → 우회전")
+            #         #detector.motor.turn_right()
+            #         print("right turn")
+            #     else:
+            #         logging.debug("차선 중앙 → 직진")
+            #         #detector.motor.forward()
+            #         print("forward")
 
             # 루프 주기
             time.sleep(0.05)
