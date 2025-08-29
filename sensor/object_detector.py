@@ -18,9 +18,34 @@ from constants import (
 )
 
 class ObjectDetector:
+
     """
     초음파(이상치 필터) + 카메라(검정색 마스크)로 장애물 판단 및 좌/우 회피
     """
+
+    def read_distance_filtered(self):
+        """초음파 값(이상치/점프 거부/중앙값) 필터 적용 후 반환"""
+        return self._read_ultrasonic_filtered()
+
+    def is_obstacle(self, d_cm):
+        """히스테리시스로 장애물 여부 판정(True/False)"""
+        return self._apply_hysteresis(d_cm)
+
+    def plan_avoidance(self, frame):
+        """
+        프레임에서 '검정' 장애물 중심을 찾고,
+        회피 방향을 'left' 또는 'right'로 알려줌
+        """
+        if frame is None:
+            return "left"  # 프레임 없으면 기본 좌회전
+
+        cx, area = self._get_black_center_and_area(frame)
+        frame_center = frame.shape[1] // 2
+        if area is None or area < self.MIN_CONTOUR_AREA:
+            return "left"  # 검출 불확실 → 보수적으로 좌회전
+        return "right" if cx < frame_center else "left"
+
+
     def __init__(self, trig_pin=TRIG_PIN, echo_pin=ECHO_PIN,
                  on_turn_left=None, on_turn_right=None, on_forward=None):
         # HW
