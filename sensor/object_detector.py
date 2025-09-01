@@ -5,7 +5,7 @@ from collections import deque
 import cv2
 import numpy as np
 
-from sensors.hc_sr04p_sensor import HCSR04Sensor
+from sensor.hc_sr04p_sensor import HCSR04Sensor
 from camera.camera_controller import CameraManager
 from constants import (
     TRIG_PIN, ECHO_PIN,
